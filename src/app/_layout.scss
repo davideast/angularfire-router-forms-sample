@@ -1,0 +1,184 @@
+@import "base";
+@import "colors";
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: $hipster-grey;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: $hipster-grey;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: $hipster-grey;
+}
+:-moz-placeholder { /* Firefox 18- */
+  color: $hipster-grey;
+}
+
+.app-band {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-header-bar {
+  align-items: center;
+  color: $text-color;
+  display: flex;
+  font-family: $font-header;
+  height: 60px;
+  justify-content: center;
+  padding: 0 12px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px;
+
+  h1, h2, h3, h4, h5 {
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: $font-size-header;
+  }
+
+  &.app-header-bar-dashed {
+    border-bottom: 2px dashed $border-color;
+  }
+}
+
+.app-form-container {
+  border: 2px dashed $border-color;
+  max-height: 400px;
+  width: 92%;
+  padding: 0 20px 20px 20px;
+}
+
+.app-caption-dark {
+  background: $text-color;
+  color: white;
+  text-align: center;
+  width: 100%;
+}
+
+.app-nav {
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .app-caption-dark {
+    width: 66%;
+  }
+
+  ul {
+    display: flex;
+    justify-content: center;
+    width: 66%;
+    height: 100%;
+  }
+
+  li {
+    display: inline-block;
+    border-right: 2px dashed $border-color;
+    border-top: 2px dashed $border-color;
+    width: 34%;
+
+    &:nth-child(1) {
+      border-left: 2px dashed $border-color;
+    }
+
+    a {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      height: 100%;
+    }
+
+  }
+
+}
+
+.app-form-list {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+
+  .app-form-label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-form-input {
+    width: 100%;
+    height: 36px;
+    outline: none;
+    border: 0;
+    border-bottom: 1px dashed $text-color;
+    font-family: 'Roboto Mono';
+    font-size: 14px;
+
+    &.app-form-input-good {
+      color: $good-color;
+    }
+
+  }
+
+  input[type="submit"] {
+    cursor: pointer;
+    border: none;
+    height: 36px;
+    font-family: 'Roboto Mono';
+    font-size: 16px;
+    color: white;
+    background: $primary-color;
+
+    &:active {
+      background: $info-color;
+    }
+  }
+
+  li {
+    margin-bottom: 10px;
+  }
+
+  li:last-child {
+    margin-top: 20px;
+  }
+
+}
+
+.circle-icon {
+  width: 18px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 10px;
+  padding: 9px 0;
+  line-height: 0;
+  background: $text-color;
+  color: white;
+  font-weight: 400;
+  font-family: $font-header;
+  display: inline-block;
+  position: relative;
+  vertical-align: super;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .app-nav {
+    .app-caption-dark {
+      width: 100%;
+    }
+    ul {
+      width: 100%;
+    }
+  }
+  .app-form-container {
+    width: 100%;
+  }
+}

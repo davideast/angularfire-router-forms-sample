@@ -1,3 +1,73 @@
-<h1>
-  {{title}}
-</h1>
+<!--
+
+  <header></header>
+
+  <router-outlet><router-outlet>
+
+  <firey-footer-nav></firey-footer-nav>
+
+-->
+
+<header class="app-header app-header-bar">
+  <h2>AngularFire + Forms + Router</h2>
+</header>
+
+<section class="app-band">
+
+  <section class="app-form-container">
+
+    <header class="app-header-bar app-header-bar-dashed">
+      <h3>Sign Up For a free acount!</h3>
+    </header>
+
+    <form novalidate>
+
+      <ul class="app-form-list">
+        <li>
+          <label class="app-form-label">
+            <span>
+              Email
+              <span class="circle-icon">?</span>
+            </span>
+
+            <input class="app-form-input app-form-input-good" type="text" placeholder="robo.dog@gmail.com">
+          </label>
+        </li>
+        <li>
+          <label class="app-form-label">
+            <span>
+              Password
+              <span class="circle-icon">?</span>
+            </span>
+            <input class="app-form-input" type="password" placeholder="Seriously, don't use 'password' 😠">
+          </label>
+        </li>
+        <li>
+          <label class="app-form-label">
+            <input type="submit" value="Sign Up">
+          </label>
+        </li>
+      </ul>
+
+    </form>
+
+  </section>
+
+</section>
+
+<nav class="app-nav">
+  <div class="app-caption-dark">
+    Click one of these to see another form
+  </div>
+  <ul>
+    <li>
+      <a href="#">Sign Up</a>
+    </li>
+    <li>
+      <a href="#">Credit Card</a>
+    </li>
+    <li>
+      <a href="#">Split</a>
+    </li>
+  </ul>
+</nav>
