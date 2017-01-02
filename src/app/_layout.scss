@@ -122,10 +122,13 @@
     font-family: 'Roboto Mono';
     font-size: 14px;
 
-    &.app-form-input-good {
-      color: $good-color;
+    &.ng-invalid {
+      color: $text-color;
     }
 
+    &.ng-valid {
+      color: $good-color;
+    }
   }
 
   input[type="submit"] {
@@ -136,9 +139,13 @@
     font-size: 16px;
     color: white;
     background: $primary-color;
+    transition: background 0.3s ease-in;
 
     &:active {
       background: $info-color;
+    }
+    &:disabled {
+      background: $hipster-grey;
     }
   }
 

@@ -20,7 +20,7 @@
       <h3>Sign Up For a free acount!</h3>
     </header>
 
-    <form novalidate>
+    <form novalidate [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm)">
 
       <ul class="app-form-list">
         <li>
@@ -29,8 +29,11 @@
               Email
               <span class="circle-icon">?</span>
             </span>
-
-            <input class="app-form-input app-form-input-good" type="text" placeholder="robo.dog@gmail.com">
+            <input
+              class="app-form-input"
+              type="text"
+              placeholder="robo.dog@gmail.com"
+              formControlName="email">
           </label>
         </li>
         <li>
@@ -39,16 +42,19 @@
               Password
               <span class="circle-icon">?</span>
             </span>
-            <input class="app-form-input" type="password" placeholder="Seriously, don't use 'password' 😠">
+            <input
+              class="app-form-input"
+              type="password"
+              placeholder="Seriously, don't use 'password' 😠"
+              formControlName="password">
           </label>
         </li>
         <li>
           <label class="app-form-label">
-            <input type="submit" value="Sign Up">
+            <input type="submit" value="Sign Up" [disabled]="signUpForm.invalid">
           </label>
         </li>
       </ul>
-
     </form>
 
   </section>
