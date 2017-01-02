@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 
 /**
@@ -36,8 +36,15 @@ export class AppComponent implements OnInit {
      * Creates the email and password form group
      */
     this.signUpForm = this.fb.group({
-      email: ['', [Validators.required, Validators.minLength(4)]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      email: ['', [
+        Validators.required,
+        Validators.minLength(4),
+        Validators.pattern(/.+@.+/)
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/)
+      ]]
     });
   }
 
@@ -45,11 +52,21 @@ export class AppComponent implements OnInit {
     console.log(event);
   }
 
-  determineClass(control: FormControl) {
-    return {
-      "app-form-input": control.valid === false,
-      "app-form-input app-form-input-good": control.valid
-    };
-  }
+}
 
+export function emailValidator(nameRe: RegExp): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} => {
+    const name = control.value;
+    const no = nameRe.test(name);
+    return no ? {'forbiddenName': {name}} : null;
+  };
+}
+
+
+export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
+  return (control: AbstractControl): {[key: string]: any} => {
+    const name = control.value;
+    const no = nameRe.test(name);
+    return no ? {'forbiddenName': {name}} : null;
+  };
 }
