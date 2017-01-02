@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Directive, HostListener } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
 
 
@@ -54,19 +54,12 @@ export class AppComponent implements OnInit {
 
 }
 
-export function emailValidator(nameRe: RegExp): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} => {
-    const name = control.value;
-    const no = nameRe.test(name);
-    return no ? {'forbiddenName': {name}} : null;
-  };
-}
-
-
-export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
-  return (control: AbstractControl): {[key: string]: any} => {
-    const name = control.value;
-    const no = nameRe.test(name);
-    return no ? {'forbiddenName': {name}} : null;
-  };
+@Directive({
+  selector: '[app-popover]'
+})
+export class PopoverDirective {
+  @HostListener('mouseover', ['$event.target'])
+  onMouseOver(el: HTMLElement) {
+    console.log(el);
+  }
 }

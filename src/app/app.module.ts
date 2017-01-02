@@ -5,13 +5,14 @@ import { HttpModule } from '@angular/http';
 // import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AppComponent } from './app.component';
+import { AppComponent, PopoverDirective } from './app.component';
 import { NavFooterComponent } from './nav-footer/nav-footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavFooterComponent,
+    PopoverDirective
   ],
   imports: [
     BrowserModule,
