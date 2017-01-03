@@ -1,7 +1,14 @@
-import { Component, OnInit, Directive, HostListener } from '@angular/core';
+import { Component, OnInit, Directive, HostListener, ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { AngularFire, FIREBASE_PROVIDERS } from 'angularfire2';
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/debounceTime';
 
-
+const EMAIL_PATTERN = /.+@.+/;
+const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/;
 /**
  * TODO: Move to own module
  */
@@ -29,7 +36,7 @@ export interface FormSubmitEvent<T> {
 export class AppComponent implements OnInit {
 
   signUpForm: FormGroup;
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private af: AngularFire) {}
 
   ngOnInit() {
     /**
@@ -39,27 +46,47 @@ export class AppComponent implements OnInit {
       email: ['', [
         Validators.required,
         Validators.minLength(4),
-        Validators.pattern(/.+@.+/)
+        Validators.pattern(EMAIL_PATTERN)
       ]],
       password: ['', [
         Validators.required,
-        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/)
+        Validators.pattern(PASSWORD_PATTERN)
       ]]
     });
+    this.af.auth.filter(auth => !!auth).subscribe(console.log);
   }
 
   onSubmit(event: FormSubmitEvent<SignUp>) {
-    console.log(event);
+    if(event.valid) {
+      this.af.auth.createUser(event.value);
+    }
   }
 
 }
 
-@Directive({
-  selector: '[app-popover]'
-})
-export class PopoverDirective {
-  @HostListener('mouseover', ['$event.target'])
-  onMouseOver(el: HTMLElement) {
-    console.log(el);
+/**
+ * Checks against users stored in the Firebase Database to see if the
+ * email is available.
+ *
+ * /userEmails/email
+ */
+function emailExistsValidator(af: AngularFire) {
+  return function emailExistsValidatorFn(control: FormControl) {
+    return Observable.create((observer: Observer<boolean>) => {
+      debugger;
+      control.valueChanges
+        .debounceTime(400)
+        // Network requests only for valid emails
+        .filter(value => {
+          return EMAIL_PATTERN.test(value);
+        })
+        .switchMap(value => {
+          return af.database.object(`userEmails/${value}`);
+        })
+        .subscribe((exists: boolean) => {
+          observer.next(!!exists);
+          observer.complete();
+        });
+    });
   }
 }
