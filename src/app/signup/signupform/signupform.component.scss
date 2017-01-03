@@ -1,0 +1,18 @@
+@import "../../colors";
+@import "../../base";
+@import "../../layout";
+
+:host {
+  font-family: $font-regular;
+
+  .app-header {
+    margin: 20px 0 100px 0;
+  }
+
+  @media (max-width: 600px) {
+    .app-header {
+      margin: 20px 0 60px 0;
+    }
+  }
+
+}

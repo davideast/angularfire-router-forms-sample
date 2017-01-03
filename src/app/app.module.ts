@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-// import { RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
+import { SignupModule } from './signup/signup.module';
 
+import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { NavFooterComponent } from './nav-footer/nav-footer.component';
 import { PopoverDirective } from './popover/popover.directive';
@@ -23,9 +23,8 @@ import { PopoverComponent } from './popover/popover.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HttpModule,
     ReactiveFormsModule,
+    RouterModule.forRoot(ROUTES),
     AngularFireModule.initializeApp({
       apiKey: "AIzaSyBwPyYbfFhAe-C4o9yR0_Av7rOSJLKS0mw",
       authDomain: "af-router-forms.firebaseapp.com",
@@ -35,7 +34,8 @@ import { PopoverComponent } from './popover/popover.component';
     }, {
       provider: AuthProviders.Password,
       method: AuthMethods.Password
-    })
+    }),
+    SignupModule
   ],
   providers: [],
   bootstrap: [AppComponent]

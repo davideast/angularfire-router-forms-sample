@@ -16,46 +16,7 @@
 
   <section class="app-form-container">
 
-    <header class="app-header-bar app-header-bar-dashed">
-      <h3>Sign Up For a free acount!</h3>
-    </header>
-
-    <form novalidate [formGroup]="signUpForm" (ngSubmit)="onSubmit(signUpForm)">
-
-      <ul class="app-form-list">
-        <li>
-          <label class="app-form-label">
-            <span>
-              Email
-              <span class="circle-icon" app-popover appPopoverContent="❌ We won't spam you. It's a demo app.">?</span>
-            </span>
-            <input
-              class="app-form-input"
-              type="text"
-              placeholder="robo.dog@gmail.com"
-              formControlName="email">
-          </label>
-        </li>
-        <li>
-          <label class="app-form-label">
-            <span>
-              Password
-              <span class="circle-icon" app-popover appPopoverContent="It's safe. We store it in Firebase 🔥">?</span>
-            </span>
-            <input
-              class="app-form-input"
-              type="password"
-              placeholder="Seriously, don't use 'password' 😠"
-              formControlName="password">
-          </label>
-        </li>
-        <li>
-          <label class="app-form-label">
-            <input type="submit" value="Sign Up" [disabled]="signUpForm.invalid">
-          </label>
-        </li>
-      </ul>
-    </form>
+    <router-outlet></router-outlet>
 
   </section>
 
@@ -67,7 +28,7 @@
   </div>
   <ul>
     <li>
-      <a href="#">Sign Up</a>
+      <a routerLink="/signup">Sign Up</a>
     </li>
     <li>
       <a href="#">Credit Card</a>
