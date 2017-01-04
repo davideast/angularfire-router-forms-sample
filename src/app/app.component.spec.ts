@@ -1,5 +1,6 @@
 /* tslint:disable:no-unused-variable */
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { AngularFireModule, AuthProviders, AuthMethods } from 'angularfire2';
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 
@@ -9,6 +10,19 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      imports: [
+        RouterTestingModule,
+        AngularFireModule.initializeApp({
+          apiKey: "AIzaSyBwPyYbfFhAe-C4o9yR0_Av7rOSJLKS0mw",
+          authDomain: "af-router-forms.firebaseapp.com",
+          databaseURL: "https://af-router-forms.firebaseio.com",
+          storageBucket: "af-router-forms.appspot.com",
+          messagingSenderId: "163141805580"
+        }, {
+          provider: AuthProviders.Password,
+          method: AuthMethods.Password
+        }),
+      ]
     });
     TestBed.compileComponents();
   });

@@ -1,11 +1,17 @@
 /* tslint:disable:no-unused-variable */
-
+import { ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { TestBed, async } from '@angular/core/testing';
 import { PopoverDirective } from './popover.directive';
 
 describe('PopoverDirective', () => {
-  it('should create an instance', () => {
-    let directive = new PopoverDirective();
-    expect(directive).toBeTruthy();
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        PopoverDirective
+      ],
+    });
+    TestBed.compileComponents();
   });
+
+
 });

@@ -8,18 +8,11 @@ import { SignupModule } from './signup/signup.module';
 import { ROUTES } from './app.routes';
 import { AppComponent } from './app.component';
 import { NavFooterComponent } from './nav-footer/nav-footer.component';
-import { PopoverDirective } from './popover/popover.directive';
-import { PopoverComponent } from './popover/popover.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavFooterComponent,
-    PopoverDirective,
-    PopoverComponent,
-  ],
-  entryComponents: [
-    PopoverComponent
+    NavFooterComponent
   ],
   imports: [
     BrowserModule,
