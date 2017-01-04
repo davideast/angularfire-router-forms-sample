@@ -4,6 +4,7 @@ import { SignupformComponent } from './signupform/signupform.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
+import { PopoverModule } from '../popover/popover.module';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { AngularFireModule, AuthMethods, AuthProviders } from 'angularfire2';
     }, {
       provider: AuthProviders.Password,
       method: AuthMethods.Password
-    })
+    }),
+    PopoverModule
   ],
   declarations: [
     SignupformComponent

@@ -24,14 +24,10 @@ export class PopoverDirective implements OnInit {
   @HostListener('mouseover', ['$event'])
   onMouseOver(event: MouseEvent) {
     this.popover.instance.visible = true;
-    this.popover.instance.position = {
-      x: event.clientX - 100,
-      y: event.clientY + 10
-    };
   }
 
-  @HostListener('mouseout', ['$event.target'])
-  onMouseOut() {
+  @HostListener('mouseout', ['$event'])
+  onMouseOut(event: MouseEvent) {
     this.popover.instance.visible = false;
   }
 
