@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { SignupModule } from './signup/signup.module';
 import { ConfiguredAngularFireModule } from './firebase';
 
-import { ROUTES } from './app.routes';
+import { AppRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 import { NavFooterComponent } from './nav-footer/nav-footer.component';
 
@@ -18,9 +18,8 @@ import { NavFooterComponent } from './nav-footer/nav-footer.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    RouterModule.forRoot(ROUTES),
-    ConfiguredAngularFireModule,
-    SignupModule
+    AppRoutes,
+    ConfiguredAngularFireModule
   ],
   providers: [],
   bootstrap: [AppComponent]
