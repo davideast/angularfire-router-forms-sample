@@ -11,8 +11,4 @@ export const SIGNUP_ROUTES: Routes = [
  * likely be a child module. Child modules need to use .forChild() with
  * the RouterModule to not cause chaos with modifying window.location.
  */
-export const SignupRoutes = {
-  routesForChild() {
-    return RouterModule.forChild(SIGNUP_ROUTES);
-  }
-};
+export const SignupRoutes = RouterModule.forChild(SIGNUP_ROUTES)

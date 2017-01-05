@@ -10,8 +10,4 @@ export const APP_ROUTES: Route[] = [
  * Since AppModule is top-level, it will use .forRoot() to configure the
  * routes. 'loadChildren' is used to lazy load modules per route.
  */
-export const AppRoutes = {
-  routesForRoot() {
-    return RouterModule.forRoot(APP_ROUTES);
-  }
-};
+export const AppRoutes = RouterModule.forRoot(APP_ROUTES);
