@@ -1,7 +1,17 @@
-import { Route } from '@angular/router';
+import { RouterModule, Route } from '@angular/router';
 import { AppComponent } from './app.component';
-import { SignupformComponent } from './signup/signupform/signupform.component';
 
-export const ROUTES: Route[] = [
-  { path: 'signup', component:  SignupformComponent }
+export const APP_ROUTES: Route[] = [
+  { path: 'signup', loadChildren: './signup/signup.module#SignupModule' }
 ];
+
+/**
+ * Helper function that configures routes for the top-level AppModule.
+ * Since AppModule is top-level, it will use .forRoot() to configure the
+ * routes. 'loadChildren' is used to lazy load modules per route.
+ */
+export const AppRoutes = {
+  routesForRoot() {
+    return RouterModule.forRoot(APP_ROUTES);
+  }
+};
