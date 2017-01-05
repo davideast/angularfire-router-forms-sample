@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common';
 import { SignupformComponent } from './signupform/signupform.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { ConfiguredAngularFireModule } from '../firebase';
 import { PopoverModule } from '../popover/popover.module';
+import { ConfiguredAngularFireModule } from '../firebase';
 
 @NgModule({
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    ConfiguredAngularFireModule.configure(),
+    ConfiguredAngularFireModule,
     PopoverModule
   ],
   declarations: [
