@@ -9,7 +9,6 @@ import { AppRoutes } from './app.routes';
 import { AppComponent } from './app.component';
 import { NavFooterComponent } from './nav-footer/nav-footer.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,8 +17,7 @@ import { NavFooterComponent } from './nav-footer/nav-footer.component';
   imports: [
     BrowserModule,
     ReactiveFormsModule,
-    AppRoutes,
-    ConfiguredAngularFireModule
+    AppRoutes
   ],
   providers: [],
   bootstrap: [AppComponent]

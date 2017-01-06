@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { AngularFire } from 'angularfire2';
-import 'rxjs/add/operator/filter';
+import { Component } from '@angular/core';
 
 /**
  * The AppComponent is the root placeholder component. It is responsible
@@ -13,13 +11,4 @@ import 'rxjs/add/operator/filter';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-
-  constructor(private af: AngularFire) {}
-
-  ngOnInit() {
-    this.af.auth.filter(auth => !!auth).subscribe(console.log);
-  }
-
-
-}
+export class AppComponent {}
