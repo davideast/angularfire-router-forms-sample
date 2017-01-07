@@ -35,5 +35,12 @@
           <input type="submit" value="Sign Up" [disabled]="signUpForm.invalid">
         </label>
       </li>
+      <li class="app-error-message" *ngIf="errorMessage">
+        <label class="app-form-label">
+          <span>
+            {{ errorMessage }}
+          </span>
+        </label>
+      </li>
   </ul>
 </form>

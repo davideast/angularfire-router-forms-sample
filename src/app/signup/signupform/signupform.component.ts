@@ -30,6 +30,7 @@ export interface FormSubmitEvent<T> {
 export class SignupformComponent implements OnInit {
 
   signUpForm: FormGroup;
+  errorMessage: string | null;
   constructor(private fb: FormBuilder, private af: AngularFire) {}
 
   ngOnInit() {
@@ -49,9 +50,22 @@ export class SignupformComponent implements OnInit {
     });
   }
 
+  createAndSaveUser(credentials: SignUp) {
+    return this.af.auth.createUser(credentials)
+      .then(authState => {
+        return this.af.database.object(`users/${authState.uid}`)
+          .set({
+            email: authState.auth.email
+          });
+      });
+  }
+
   onSubmit(event: FormSubmitEvent<SignUp>) {
     if(event.valid) {
-      this.af.auth.createUser(event.value);
+      this.createAndSaveUser(event.value)
+        .catch(error => {
+          this.errorMessage = error.message;
+        });
     }
   }
 

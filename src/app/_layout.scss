@@ -176,6 +176,13 @@
   cursor: pointer;
 }
 
+.app-error-message {
+  background: $hipster-light-red;
+  color: white;
+  text-align: center;
+  padding: 16px;
+}
+
 @media (max-width: 600px) {
   .app-nav {
     .app-caption-dark {
