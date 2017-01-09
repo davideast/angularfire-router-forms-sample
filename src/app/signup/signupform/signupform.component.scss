@@ -4,6 +4,9 @@
 
 :host {
   font-family: $font-regular;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 
   .app-header {
     margin: 20px 0 100px 0;
