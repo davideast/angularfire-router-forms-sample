@@ -13,6 +13,7 @@ const PASSWORD_PATTERN = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z
  * TODO: Move to own module
  */
 export interface SignUp {
+  name: string;
   email: string;
   password: string;
 }
@@ -38,6 +39,10 @@ export class SignupformComponent implements OnInit {
      * Creates the email and password form group
      */
     this.signUpForm = this.fb.group({
+      name: ['', [
+        Validators.required,
+        Validators.minLength(1),
+      ]],
       email: ['', [
         Validators.required,
         Validators.minLength(4),
@@ -55,7 +60,8 @@ export class SignupformComponent implements OnInit {
       .then(authState => {
         return this.af.database.object(`users/${authState.uid}`)
           .set({
-            email: authState.auth.email
+            email: authState.auth.email,
+            name: credentials.name
           });
       });
   }
