@@ -4,14 +4,16 @@ import { SignupformComponent } from './signupform/signupform.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PopoverModule } from '../popover/popover.module';
 import { SignupRoutes } from './signup.routes';
-import { ConfiguredAngularFireModule } from '../firebase';
+import { FirebaseAuthModule } from '../firebase-auth'
+import { APP_CONFIG } from '../firebase';
+
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
     SignupRoutes,
-    ConfiguredAngularFireModule,
+    FirebaseAuthModule.initializeApp(APP_CONFIG),
     PopoverModule
   ],
   declarations: [

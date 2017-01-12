@@ -1,6 +1,7 @@
 import { Component, OnInit, Directive, HostListener, ViewContainerRef, ComponentFactoryResolver, ComponentRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { AngularFire, FIREBASE_PROVIDERS } from 'angularfire2';
+// import { AngularFire } from 'angularfire2';
+import { FirebaseAuth } from '../../firebase-auth';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
 import 'rxjs/add/operator/switchMap';
@@ -32,7 +33,7 @@ export class SignupformComponent implements OnInit {
 
   signUpForm: FormGroup;
   errorMessage: string | null;
-  constructor(private fb: FormBuilder, private af: AngularFire) {}
+  constructor(private fb: FormBuilder, private afAuth: FirebaseAuth) {}
 
   ngOnInit() {
     /**
@@ -53,16 +54,20 @@ export class SignupformComponent implements OnInit {
         Validators.pattern(PASSWORD_PATTERN)
       ]]
     });
+
+    this.afAuth.auth$().subscribe(console.log);
   }
 
   createAndSaveUser(credentials: SignUp) {
-    return this.af.auth.createUser(credentials)
+    this.afAuth.auth.createUserWithEmailAndPassword
+    return this.afAuth.auth.createUserWithEmailAndPassword(credentials.email, credentials.password)
       .then(authState => {
-        return this.af.database.object(`users/${authState.uid}`)
-          .set({
-            email: authState.auth.email,
-            name: credentials.name
-          });
+        console.log(authState);
+        // return this.af.database.object(`users/${authState.uid}`)
+        //   .set({
+        //     email: authState.auth.email,
+        //     name: credentials.name
+        //   });
       });
   }
 
@@ -83,23 +88,23 @@ export class SignupformComponent implements OnInit {
  *
  * /userEmails/email
  */
-function emailExistsValidator(af: AngularFire) {
-  return function emailExistsValidatorFn(control: FormControl) {
-    return Observable.create((observer: Observer<boolean>) => {
-      debugger;
-      control.valueChanges
-        .debounceTime(400)
-        // Network requests only for valid emails
-        .filter(value => {
-          return EMAIL_PATTERN.test(value);
-        })
-        .switchMap(value => {
-          return af.database.object(`userEmails/${value}`);
-        })
-        .subscribe((exists: boolean) => {
-          observer.next(!!exists);
-          observer.complete();
-        });
-    });
-  }
-}
+// function emailExistsValidator(af: AngularFire) {
+//   return function emailExistsValidatorFn(control: FormControl) {
+//     return Observable.create((observer: Observer<boolean>) => {
+//       debugger;
+//       control.valueChanges
+//         .debounceTime(400)
+//         // Network requests only for valid emails
+//         .filter(value => {
+//           return EMAIL_PATTERN.test(value);
+//         })
+//         .switchMap(value => {
+//           return af.database.object(`userEmails/${value}`);
+//         })
+//         .subscribe((exists: boolean) => {
+//           observer.next(!!exists);
+//           observer.complete();
+//         });
+//     });
+//   }
+// }
